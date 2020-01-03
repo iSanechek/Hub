@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AverdHub</string>
+
+    <!--Toast message-->
+    <string name="apps_load_error_toast_msg">При загрузке списка приложений произошла ошибка!</string>
+
+    <!--Dashboard Screen-->
+    <string name="ds_social_title">"Social Action"</string>
+    <string name="ds_apps_title">"Apps Info"</string>
+
+    <!--Splash screen-->
+    <string name="splash_screen_welcome_text">Добро пожаловать в Hub</string>
 </resources>
