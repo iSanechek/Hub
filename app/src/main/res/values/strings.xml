@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AverdHub</string>
+    <string name="app_name">Hub</string>
 
     <!--Toast message-->
     <string name="apps_load_error_toast_msg">При загрузке списка приложений произошла ошибка!</string>
