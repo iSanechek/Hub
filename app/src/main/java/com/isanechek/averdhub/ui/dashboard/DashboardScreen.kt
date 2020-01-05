@@ -3,15 +3,21 @@ package com.isanechek.averdhub.ui.dashboard
 import android.util.Log
 import androidx.compose.Composable
 import androidx.compose.unaryPlus
+import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.HorizontalScroller
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.*
+import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
+import androidx.ui.material.surface.Surface
 import androidx.ui.res.stringResource
+import com.isanechek.averdhub.ext._drawable
 import com.isanechek.averdhub.ext._text
 import com.isanechek.averdhub.ext.observe
+import com.isanechek.averdhub.ui.components.CustomTopAppBar
+import com.isanechek.averdhub.ui.components.VectorImageButton
 
 interface DashboardScreen {
 
@@ -20,14 +26,18 @@ interface DashboardScreen {
 
         @Composable
         fun Content(vm: DashboardViewModel, goToScreen: (Any) -> Unit) {
-
-
             FlexColumn {
                 inflexible {
-                    TopAppBar(title = { Text(text = "Hub") })
+                    CustomTopAppBar(
+                        title = { Text(text = "Hub") },
+                        actionData = listOf(_drawable.ic_baseline_brightness_2_24)
+                    ) { item ->
+                        VectorImageButton(id = item, onClick = vm.changeTheme, tint = (+MaterialTheme.colors()).onBackground)
+                    }
                 }
 
                 flexible(flex = 1f) {
+
                     VerticalScroller {
                         Column {
                             SocialActionSection(vm, goToScreen)

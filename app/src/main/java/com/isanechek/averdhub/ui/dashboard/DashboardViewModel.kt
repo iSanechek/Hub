@@ -1,5 +1,8 @@
 package com.isanechek.averdhub.ui.dashboard
 
+import android.os.Build
+import androidx.compose.state
+import androidx.compose.unaryPlus
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,7 +12,10 @@ import com.isanechek.averdhub.data.models.SocialAction
 import com.isanechek.averdhub.data.repositories.AppsRepository
 import com.isanechek.averdhub.ext._text
 import com.isanechek.averdhub.ui.base.BaseViewModel
+import com.isanechek.averdhub.ui.darkThemeColors
+import com.isanechek.averdhub.ui.lightThemeColors
 import kotlinx.coroutines.launch
+
 
 private const val TAG = "DashboardViewModel"
 
@@ -24,13 +30,17 @@ class DashboardViewModel(private val repository: AppsRepository) : BaseViewModel
     private val _appsData = MutableLiveData<List<InstallApp>>()
     val appsData: LiveData<List<InstallApp>> get() = _appsData
 
-
-    fun socialSectionCallback(iem: SocialAction) {
-
-    }
-
-    fun appsSectionCallback(item: InstallApp) {
-
+    private val _darkStatusBar = MutableLiveData<Boolean>(false)
+    val darkStatusBar: LiveData<Boolean> get() = _darkStatusBar
+    var currentTheme by +state { lightThemeColors }
+    val changeTheme = {
+        currentTheme = if (currentTheme == lightThemeColors) {
+            _darkStatusBar.value = true
+            darkThemeColors
+        } else {
+            _darkStatusBar.value = false
+            lightThemeColors
+        }
     }
 
 

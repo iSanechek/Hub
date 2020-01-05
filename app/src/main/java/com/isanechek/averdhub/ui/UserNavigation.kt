@@ -2,6 +2,8 @@ package com.isanechek.averdhub.ui
 
 import android.util.Log
 import androidx.compose.Composable
+import androidx.ui.material.MaterialTheme
+import androidx.ui.material.surface.Surface
 import com.github.zsoltk.compose.router.Router
 import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.data.models.SocialAction
@@ -25,17 +27,13 @@ interface UserNavigation {
                     is Routing.Dashboard -> DashboardScreen.Content(
                         vm = dashboardVm,
                         goToScreen = { data ->
-                            Log.e(TAG, "Content: data $data")
                             when (data) {
                                 is InstallApp -> {
-                                    Log.e(TAG, "Content: Go to App Detail")
                                     backStack.push(Routing.AppsDetail(
                                         data = data
                                     ))
                                 }
-                                is SocialAction -> {
-                                    Log.e(TAG, "Content: Go to Social Detail")
-                                }
+                                is SocialAction -> {}
                                 else -> Log.e(TAG, "Content: Go to Hz")
                             }
                         }
