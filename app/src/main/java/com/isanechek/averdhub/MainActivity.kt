@@ -73,8 +73,8 @@ class MainActivity : AppCompatActivity() {
 //                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 //                window.statusBarColor = ContextCompat.getColor(this, R.color.hubDarkPrimaryDark)
                 decor.systemUiVisibility = 0
-                window.statusBarColor = Color.BLACK
-                window.navigationBarColor = Color.BLACK
+                window.statusBarColor = Color.parseColor("#0C0C0D")
+                window.navigationBarColor = Color.parseColor("#0C0C0D")
             }
         }
     }

@@ -1,11 +1,13 @@
 package com.isanechek.averdhub.ui.appsdetail
 
 import androidx.compose.Composable
+import androidx.compose.unaryPlus
 import androidx.ui.core.Dp
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.*
+import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.surface.Card
 import androidx.ui.tooling.preview.Preview
@@ -43,8 +45,9 @@ interface AppsDetailScreen {
                 title = { Text(text = title) },
                 navigationIcon = {
                     VectorImageButton(
-                        id = _drawable.abc_ic_arrow_drop_right_black_24dp,
-                        onClick = goBack
+                        id = _drawable.ic_baseline_arrow_back_24,
+                        onClick = goBack,
+                        tint = (+MaterialTheme.colors()).onBackground
                     )
                 }
             )
