@@ -50,6 +50,12 @@ class MainActivity : AppCompatActivity() {
         timeCapsule.onSaveInstanceState(outState)
     }
 
+    override fun onBackPressed() {
+        if (!backPressHandler.handle()) {
+            super.onBackPressed()
+        }
+    }
+
     private fun changeColorStatusBar(light: Boolean) {
         val decor = window.decorView
         when {
