@@ -1,47 +1,134 @@
 package com.isanechek.averdhub.ui.dashboard
 
-import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.compose.Composable
-import androidx.ui.core.Clip
-import androidx.ui.core.Text
-import androidx.ui.core.dp
+import androidx.compose.unaryPlus
+import androidx.ui.core.*
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.shape.border.Border
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.Column
-import androidx.ui.layout.Container
-import androidx.ui.layout.Padding
-import androidx.ui.layout.Spacing
+import androidx.ui.graphics.Color
+import androidx.ui.layout.*
+import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
+import androidx.ui.res.stringResource
+import androidx.ui.res.vectorResource
+import androidx.ui.text.TextStyle
+import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.ext.PostImage
+import com.isanechek.averdhub.ext._drawable
+import com.isanechek.averdhub.ext._text
+import com.isanechek.averdhub.ui.appFontFamily
+import com.isanechek.averdhub.ui.components.CircularImage
+import com.isanechek.averdhub.ui.components.SimpleVector
+import com.isanechek.averdhub.ui.themeTypography
 
 private const val TAG = "DashboardAppsCard"
 
 @Composable
 fun DashboardAppsCard(item: InstallApp, callback: (InstallApp) -> Unit) {
+
     Padding(right = 2.dp, left = 2.dp) {
         Card(shape = RoundedCornerShape(8.dp)) {
             Ripple(bounded = true) {
-                Clickable(onClick = {
-                    Log.e(TAG, "DashboardAppsCard: Click")
-                    callback.invoke(item)
-                }) {
-                    Column {
-
-                        Container(height = 100.dp, width = 250.dp, expanded = false) {
-                            Clip(shape = RoundedCornerShape(8.dp)) {
-                                PostImage(imageUrl = item.caverUrl)
+                Clickable(onClick = { callback.invoke(item) }) {
+                    Stack {
+                        expanded {
+                            Column {
+                                Container(height = 120.dp, width = 250.dp, expanded = false) {
+                                    Clip(
+                                        shape = RoundedCornerShape(
+                                            topLeft = 8.dp,
+                                            topRight = 8.dp,
+                                            bottomLeft = 0.dp,
+                                            bottomRight = 0.dp
+                                        )
+                                    ) {
+                                        PostImage(imageUrl = item.caverUrl)
+                                    }
+                                }
+                                Column(modifier = Spacing(16.dp)) {
+                                    Text(text = item.name, style = themeTypography.h6)
+                                    drawAppStatus(status = item.status)
+                                }
                             }
                         }
-                        Column(modifier = Spacing(16.dp)) {
-                            Text(text = item.name)
-                            Text(text = item.status)
+                        aligned(alignment = Alignment.BottomRight) {
+                            Padding(
+                                padding = EdgeInsets(
+                                    left = 0.dp,
+                                    right = 16.dp,
+                                    top = 0.dp,
+                                    bottom = 55.dp
+                                )
+                            ) {
+                                Card(
+                                    border = Border(
+                                        color = (+MaterialTheme.colors()).background,
+                                        width = 1.dp
+                                    ),
+                                    shape = RoundedCornerShape(50.dp),
+                                    elevation = 0.dp
+                                ) {
+                                    CircularImage(
+                                        data = _drawable.test_img,
+                                        size = 50.dp
+                                    )
+                                }
+                            }
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun drawAppStatus(status: String) {
+    when (status) {
+        InstallApp.STATUS_INSTALL -> drawStatus(
+            iconId = _drawable.app_install_done,
+            statusText = +stringResource(_text.app_install_status_done),
+            color = Color.Green
+        )
+        InstallApp.STATUS_NEED_UPDATE -> drawStatus(
+            iconId = _drawable.app_install_alert,
+            statusText = +stringResource(_text.app_install_status_update),
+            color = Color.Yellow
+        )
+        InstallApp.STATUS_NOT_INSTALL -> drawStatus(
+            iconId = _drawable.app_install_alert,
+            statusText = +stringResource(_text.app_install_status_not),
+            color = Color.Red
+        )
+    }
+}
+
+
+@Composable
+private fun drawStatus(@DrawableRes iconId: Int, statusText: String, color: Color) {
+
+
+    Row {
+        Card(
+            border = Border(color = color, width = 1.dp),
+            elevation = 0.dp,
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Padding(padding = 2.dp) {
+                SimpleVector(id = iconId, tint = color)
+            }
+        }
+
+        Padding(padding = 4.dp) {
+            Text(
+                text = statusText,
+                style = themeTypography.body2
+            )
         }
     }
 }

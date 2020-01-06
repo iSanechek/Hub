@@ -7,6 +7,9 @@
     <!--Dashboard Screen-->
     <string name="ds_social_title">"Social Action"</string>
     <string name="ds_apps_title">"Apps Info"</string>
+    <string name="app_install_status_done">install</string>
+    <string name="app_install_status_update">new version</string>
+    <string name="app_install_status_not">not installed</string>
 
     <!--Splash screen-->
     <string name="splash_screen_welcome_text">Добро пожаловать в Hub</string>
