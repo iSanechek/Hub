@@ -5,18 +5,18 @@
     <color name="colorAccent">#03DAC5</color>
 
 
-    <!--light-->
-    <color name="hubLightPrimary">#FFFFFF</color>
-    <color name="hubLightOnPrimary">#000000</color>
-    <color name="hubLightPrimaryDark">#FFFFFF</color> <!--Color for status bar-->
-    <color name="hubLightSurface">#212121</color>
-    <color name="hubLightAccent">#2c9934</color>
+<!--    &lt;!&ndash;light&ndash;&gt;-->
+<!--    <color name="hubLightPrimary">#FFFFFF</color>-->
+<!--    <color name="hubLightOnPrimary">#000000</color>-->
+<!--    <color name="hubLightPrimaryDark">#FFFFFF</color> &lt;!&ndash;Color for status bar&ndash;&gt;-->
+<!--    <color name="hubLightSurface">#212121</color>-->
+<!--    <color name="hubLightAccent">#2c9934</color>-->
 
 
-    <!--dark-->
-    <color name="hubDarkPrimary">#000000</color>
-    <color name="hubDarkOnPrimary">#FFFFFF</color>
-    <color name="hubDarkPrimaryDark">#000000</color> <!--Color for status bar-->
-    <color name="hubDarkSurface">#212121</color>
-    <color name="hubDarkSecondary">#2c9934</color>
+<!--    &lt;!&ndash;dark&ndash;&gt;-->
+<!--    <color name="hubDarkPrimary">#000000</color>-->
+<!--    <color name="hubDarkOnPrimary">#FFFFFF</color>-->
+<!--    <color name="hubDarkPrimaryDark">#000000</color> &lt;!&ndash;Color for status bar&ndash;&gt;-->
+<!--    <color name="hubDarkSurface">#212121</color>-->
+<!--    <color name="hubDarkSecondary">#2c9934</color>-->
 </resources>

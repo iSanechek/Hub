@@ -13,7 +13,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
 
-    def appId = "com.isanechek.hub"
+    def appId = "com.isanechek.averdhub"
     def fileNaming = "apk/Hub"
     def versionNumber = 1
     def versionMajor = "0"
@@ -97,7 +97,7 @@ dependencies {
     implementation 'androidx.ui:ui-text:0.1.0-dev03'
     implementation 'androidx.ui:ui-material:0.1.0-dev03'
     implementation 'androidx.ui:ui-tooling:0.1.0-dev03'
-    implementation 'com.github.zsoltk:backtrack:0.2.0'
+    implementation 'com.github.zsoltk:backtrack:0.3.0'
 
 
     implementation("io.coil-kt:coil:0.9.1")

@@ -2,19 +2,28 @@ package com.isanechek.averdhub.ui.appsdetail
 
 import androidx.compose.Composable
 import androidx.compose.unaryPlus
-import androidx.ui.core.Dp
+import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.shape.border.Border
+import androidx.ui.foundation.shape.corner.RoundedCornerShape
+import androidx.ui.graphics.Color
 import androidx.ui.layout.*
+import androidx.ui.material.Button
+import androidx.ui.material.ButtonStyle
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
+import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
+import androidx.ui.res.vectorResource
 import androidx.ui.tooling.preview.Preview
 import com.isanechek.averdhub.data.models.InstallApp
-import com.isanechek.averdhub.ext.PostImage
-import com.isanechek.averdhub.ext._drawable
+import com.isanechek.averdhub.ext.*
+import com.isanechek.averdhub.ui.components.SimpleVector
+import com.isanechek.averdhub.ui.components.SmallInstallButton
 import com.isanechek.averdhub.ui.components.VectorImageButton
+import com.isanechek.averdhub.ui.themeTypography
 
 interface AppsDetailScreen {
 
@@ -63,34 +72,59 @@ interface AppsDetailScreen {
 
         @Composable
         private fun AppInfoSection(item: InstallApp) {
-            Card {
-                Container(height = 80.dp, expanded = true) {
-                    Row {
-                        Column {
-                            Text(text = item.name)
-                            Text(text = item.version)
-                        }
+            Card(elevation = 2.dp, color = (+MaterialTheme.colors()).background) {
 
+                Stack {
+                    aligned(alignment = Alignment.CenterLeft) {
+                        Padding(left = 16.dp) {
+                            Column {
+                                Text(
+                                    text = "version: ${item.version}",
+                                    style = themeTypography.subtitle2
+                                )
+                            }
+                        }
+                    }
+
+
+                    expanded {
+                        // по другому хз как раскарячить стек.
+                        Container(height = 80.dp, expanded = true) {
+
+
+                        }
+                    }
+
+                    aligned(alignment = Alignment.CenterRight) {
+                        Padding(right = 16.dp) {
+                            setupStatusAction(status = item.status)
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        @Composable
+        private fun ContentTextSection(item: InstallApp) {
+            Padding(left = 8.dp, right = 8.dp, bottom = 8.dp) {
+                Card(shape = RoundedCornerShape(8.dp), elevation = 2.dp) {
+                    Padding(padding = 16.dp) {
+                        Text(text = item.description, style = themeTypography.body1)
                     }
                 }
             }
         }
 
         @Composable
-        private fun ContentTextSection(item: InstallApp) {
-
-            Padding(left = 16.dp, right = 16.dp) {
-                Container(expanded = true) {
-                    Column {
-
-                    }
-                }
+        private fun setupStatusAction(status: String) {
+            when (status) {
+                InstallApp.STATUS_NOT_INSTALL -> SmallInstallButton(text = "install", onClick = {}, backgroundColor = red700)
+                InstallApp.STATUS_INSTALL -> SmallInstallButton(text = "rating", onClick = {}, backgroundColor = green700)
+                InstallApp.STATUS_NEED_UPDATE -> SmallInstallButton(text = "update", onClick = {}, backgroundColor = yellow700)
             }
-
         }
-
-
-
     }
 }
 

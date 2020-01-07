@@ -28,34 +28,13 @@ class AppsRepositoryImpl(
                     when {
                         packages.isNotEmpty() -> {
                             val temp = mutableListOf<InstallApp>()
-                            for (info in packages) {
-                                var status: String
+                            packages.forEach { info ->
                                 testData.find { it.packageName == info.packageName }?.let { app ->
-                                    Log.e(
-                                        TAG,
-                                        "transformation: Install Version ${info.versionName}"
-                                    )
-                                    Log.e(TAG, "transformation: Averd Version ${app.version}")
-                                    status = when {
-                                        !info.versionName.contains(app.version) -> {
-                                            InstallApp.STATUS_NEED_UPDATE
-                                        }
-                                        else -> {
-                                            InstallApp.STATUS_INSTALL
-                                        }
+                                    val status = when {
+                                        !info.versionName.contains(app.version) -> InstallApp.STATUS_NEED_UPDATE
+                                        else -> InstallApp.STATUS_INSTALL
                                     }
-
-                                    temp.add(
-                                        InstallApp(
-                                            name = app.name,
-                                            packageName = info.packageName,
-                                            status = status,
-                                            caverUrl = "",
-                                            iconUrl = "",
-                                            version = "",
-                                            description = ""
-                                        )
-                                    )
+                                    temp.add(app.toInstallApp(status))
                                 }
                             }
 
@@ -82,7 +61,7 @@ class AppsRepositoryImpl(
         iconUrl = this.iconUrl,
         caverUrl = this.coverUrl,
         version = this.version,
-        description = ""
+        description = this.description
     )
 
     private val testData = listOf(
@@ -91,21 +70,24 @@ class AppsRepositoryImpl(
             packageName = "my.wallpapers.averdsoft",
             coverUrl = "",
             iconUrl = "",
-            version = "2.0.14"
+            version = "2.0.14",
+            description = "Здесь должно быть описание приложение, но его пока нет. Так что здесь будет пока эта хрень. И хрени будет много!"
         ),
         AverdApp(
             name = "БалтТур",
             packageName = "com.averdsoft.balttur",
             coverUrl = "",
             iconUrl = "",
-            version = "1.0.1 (689)"
+            version = "1.0.1 (689)",
+            description = "Здесь должно быть описание приложение, но его пока нет. Так что здесь будет пока эта хрень. И хрени будет много!"
         ),
         AverdApp(
             name = "СваркаСпБ",
             packageName = "com.svarochnyeraboty.tosno",
             coverUrl = "",
             iconUrl = "",
-            version = "1.2.2"
+            version = "1.2.2",
+            description = "Здесь должно быть описание приложение, но его пока нет. Так что здесь будет пока эта хрень. И хрени будет много!"
         )
     )
 

@@ -5,5 +5,6 @@ data class AverdApp(
     val packageName: String,
     val version: String,
     val iconUrl: String,
-    val coverUrl: String
+    val coverUrl: String,
+    val description: String
 )

@@ -23,10 +23,10 @@ val darkThemeColors = ColorPalette(
     onPrimary = Color.White,
     secondary = Color(0xFF2c9934),
     onSecondary = Color.White,
-    surface = Color(0xFF0C0C0D),
+    surface = Color(0xFF19191A),
     background = Color(0xFF0C0C0D),
     onBackground = Color.White,
-    onSurface = Color(0xFF272727),
+    onSurface = Color.White,
     error = Color(0xFFD00036),
     onError = Color.White
 )

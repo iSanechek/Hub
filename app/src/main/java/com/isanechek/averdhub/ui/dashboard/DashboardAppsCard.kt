@@ -18,9 +18,7 @@ import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import com.isanechek.averdhub.data.models.InstallApp
-import com.isanechek.averdhub.ext.PostImage
-import com.isanechek.averdhub.ext._drawable
-import com.isanechek.averdhub.ext._text
+import com.isanechek.averdhub.ext.*
 import com.isanechek.averdhub.ui.appFontFamily
 import com.isanechek.averdhub.ui.components.CircularImage
 import com.isanechek.averdhub.ui.components.SimpleVector
@@ -30,7 +28,6 @@ private const val TAG = "DashboardAppsCard"
 
 @Composable
 fun DashboardAppsCard(item: InstallApp, callback: (InstallApp) -> Unit) {
-
     Padding(right = 2.dp, left = 2.dp) {
         Card(shape = RoundedCornerShape(8.dp)) {
             Ripple(bounded = true) {
@@ -93,17 +90,17 @@ private fun drawAppStatus(status: String) {
         InstallApp.STATUS_INSTALL -> drawStatus(
             iconId = _drawable.app_install_done,
             statusText = +stringResource(_text.app_install_status_done),
-            color = Color.Green
+            color = green700
         )
         InstallApp.STATUS_NEED_UPDATE -> drawStatus(
             iconId = _drawable.app_install_alert,
             statusText = +stringResource(_text.app_install_status_update),
-            color = Color.Yellow
+            color = yellow700
         )
         InstallApp.STATUS_NOT_INSTALL -> drawStatus(
             iconId = _drawable.app_install_alert,
             statusText = +stringResource(_text.app_install_status_not),
-            color = Color.Red
+            color = red700
         )
     }
 }
@@ -111,18 +108,12 @@ private fun drawAppStatus(status: String) {
 
 @Composable
 private fun drawStatus(@DrawableRes iconId: Int, statusText: String, color: Color) {
-
-
     Row {
-        Card(
-            border = Border(color = color, width = 1.dp),
-            elevation = 0.dp,
-            shape = RoundedCornerShape(8.dp)
-        ) {
-            Padding(padding = 2.dp) {
-                SimpleVector(id = iconId, tint = color)
-            }
+        Padding(padding = 2.dp) {
+            SimpleVector(id = iconId, tint = color)
         }
+
+        WidthSpacer(width = 2.dp)
 
         Padding(padding = 4.dp) {
             Text(

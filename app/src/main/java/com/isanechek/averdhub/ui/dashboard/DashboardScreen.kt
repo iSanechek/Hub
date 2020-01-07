@@ -18,6 +18,7 @@ import com.isanechek.averdhub.ext._text
 import com.isanechek.averdhub.ext.observe
 import com.isanechek.averdhub.ui.components.CustomTopAppBar
 import com.isanechek.averdhub.ui.components.VectorImageButton
+import com.isanechek.averdhub.ui.themeTypography
 
 interface DashboardScreen {
 
@@ -32,7 +33,11 @@ interface DashboardScreen {
                         title = { Text(text = "Hub") },
                         actionData = listOf(_drawable.ic_baseline_brightness_2_24)
                     ) { item ->
-                        VectorImageButton(id = item, onClick = vm.changeTheme, tint = (+MaterialTheme.colors()).onBackground)
+                        VectorImageButton(
+                            id = item,
+                            onClick = vm.changeTheme,
+                            tint = (+MaterialTheme.colors()).onBackground
+                        )
                     }
                 }
 
@@ -50,7 +55,6 @@ interface DashboardScreen {
 
         @Composable
         private fun SocialActionSection(vm: DashboardViewModel, goToScreen: (Any) -> Unit) {
-
             SectionTitle(title = +stringResource(_text.ds_social_title))
 
             HorizontalScroller {
@@ -74,10 +78,9 @@ interface DashboardScreen {
                 Row(modifier = Spacing(all = 8.dp)) {
                     val data = +observe(vm.appsData)
                     data?.forEach {
-                        DashboardAppsCard(item = it, callback = { item ->
-                            Log.e(TAG, "AppsSection: Click ${item.name}")
-                            goToScreen.invoke(item)
-                        })
+                        DashboardAppsCard(
+                            item = it,
+                            callback = { item -> goToScreen.invoke(item) })
                     }
                 }
             }
@@ -86,7 +89,7 @@ interface DashboardScreen {
         @Composable
         private fun SectionTitle(title: String) {
             Padding(top = 16.dp, left = 16.dp, right = 16.dp) {
-                Text(text = title)
+                Text(text = title, style = themeTypography.h5)
             }
         }
     }
