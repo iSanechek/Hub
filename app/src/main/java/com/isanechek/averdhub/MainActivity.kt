@@ -4,9 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.unaryPlus
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.ui.core.setContent
 import androidx.ui.material.MaterialTheme
@@ -14,7 +12,7 @@ import androidx.ui.material.surface.Surface
 import com.github.zsoltk.compose.backpress.BackPressHandler
 import com.github.zsoltk.compose.savedinstancestate.TimeCapsule
 import com.isanechek.averdhub.ui.Root
-import com.isanechek.averdhub.ui.dashboard.DashboardViewModel
+import com.isanechek.averdhub.ui.AppViewModel
 //import com.isanechek.averdhub.ui.dashboard.DashboardViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,7 +20,7 @@ private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
-    private val dashboardViewModel by viewModel<DashboardViewModel>()
+    private val dashboardViewModel by viewModel<AppViewModel>()
     private val backPressHandler = BackPressHandler()
     private val timeCapsule = TimeCapsule()
 

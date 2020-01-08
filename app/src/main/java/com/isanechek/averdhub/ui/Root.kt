@@ -3,13 +3,12 @@ package com.isanechek.averdhub.ui
 import android.util.Log
 import androidx.compose.Composable
 import com.github.zsoltk.compose.router.Router
-import com.isanechek.averdhub.ui.dashboard.DashboardViewModel
 import com.isanechek.averdhub.ui.developer.Developer
 
 interface Root {
     sealed class Routing {
-        data class User(val dashboardViewModel: DashboardViewModel) : Routing()
-        data class God(val dashboardViewModel: DashboardViewModel) : Routing()
+        data class User(val appViewModel: AppViewModel) : Routing()
+        data class God(val appViewModel: AppViewModel) : Routing()
     }
 
     companion object {
@@ -22,8 +21,7 @@ interface Root {
                     is Routing.User -> {
                         Log.e(TAG, "Content: Go to User")
                         UserNavigation.Content(
-                            dashboardVm = currentRouting.dashboardViewModel,
-                            defaultRouting = UserNavigation.Routing.Dashboard
+                            defaultRouting = UserNavigation.Routing.Dashboard(currentRouting.appViewModel)
                         )
                     }
                     is Routing.God -> {

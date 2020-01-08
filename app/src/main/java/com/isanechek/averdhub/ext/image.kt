@@ -34,6 +34,15 @@ fun PostImage(imageUrl: String) {
     } else Log.e(TAG, "PostImage: source null")
 }
 
+@Composable
+fun PostImage(id: Int) {
+    val source = +image(_drawable.test_img)
+    if (source != null) {
+        Log.e(TAG, "PostImage: ${source.width}")
+        DrawImage(image = source)
+    } else Log.e(TAG, "PostImage: source null!")
+}
+
 /**
  * A simple [image] effect, which loads [data] with the default options.
  */

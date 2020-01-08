@@ -10,6 +10,7 @@
     <string name="app_install_status_done">install</string>
     <string name="app_install_status_update">new version</string>
     <string name="app_install_status_not">not installed</string>
+    <string name="ds_all_title">All</string>
 
     <!--Splash screen-->
     <string name="splash_screen_welcome_text">Добро пожаловать в Hub</string>

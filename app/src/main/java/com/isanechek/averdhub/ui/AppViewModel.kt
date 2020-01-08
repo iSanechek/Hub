@@ -1,37 +1,41 @@
-package com.isanechek.averdhub.ui.dashboard
+package com.isanechek.averdhub.ui
 
-import android.os.Build
+import android.util.Log
 import androidx.compose.state
 import androidx.compose.unaryPlus
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.data.models.OperationResult
 import com.isanechek.averdhub.data.models.SocialAction
 import com.isanechek.averdhub.data.repositories.AppsRepository
 import com.isanechek.averdhub.ext._text
+import com.isanechek.averdhub.ext.take
 import com.isanechek.averdhub.ui.base.BaseViewModel
 import com.isanechek.averdhub.ui.darkThemeColors
 import com.isanechek.averdhub.ui.lightThemeColors
 import kotlinx.coroutines.launch
+import kotlin.streams.toList
 
 
 private const val TAG = "DashboardViewModel"
 
-class DashboardViewModel(private val repository: AppsRepository) : BaseViewModel() {
+class AppViewModel(private val repository: AppsRepository) : BaseViewModel() {
 
     private val _socialData = MutableLiveData<List<SocialAction>>()
-    val socialData: LiveData<List<SocialAction>> get() = _socialData
+    val socialData: LiveData<List<SocialAction>> = _socialData
 
     private val _appProgressState = MutableLiveData<Boolean>()
-    val appsProgressState: LiveData<Boolean> get() = _appProgressState
+    val appsProgressState: LiveData<Boolean> = _appProgressState
 
     private val _appsData = MutableLiveData<List<InstallApp>>()
-    val appsData: LiveData<List<InstallApp>> get() = _appsData
+    val appsData: LiveData<List<InstallApp>> = _appsData
+    val shortAppsData: LiveData<List<InstallApp>> = _appsData.take(1)
 
     private val _darkStatusBar = MutableLiveData<Boolean>(false)
-    val darkStatusBar: LiveData<Boolean> get() = _darkStatusBar
+    val darkStatusBar: LiveData<Boolean> = _darkStatusBar
     var currentTheme by +state { lightThemeColors }
     val changeTheme = {
         currentTheme = if (currentTheme == lightThemeColors) {

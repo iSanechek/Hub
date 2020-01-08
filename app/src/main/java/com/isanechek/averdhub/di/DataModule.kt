@@ -1,5 +1,7 @@
 package com.isanechek.averdhub.di
 
+import com.isanechek.averdhub.data.network.InstagramParser
+import com.isanechek.averdhub.data.network.InstagramParserImpl
 import com.isanechek.averdhub.data.repositories.AppsRepository
 import com.isanechek.averdhub.data.repositories.AppsRepositoryImpl
 import com.isanechek.averdhub.utils.AppsUtils
@@ -20,5 +22,10 @@ val dataModule = module {
     // Apps Utils
     factory<AppsUtils> {
         AppsUtilsImpl()
+    }
+
+    // Instagram Parser
+    factory<InstagramParser> {
+        InstagramParserImpl()
     }
 }

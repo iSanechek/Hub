@@ -13,13 +13,8 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
 import androidx.ui.res.stringResource
-import androidx.ui.res.vectorResource
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontWeight
-import androidx.ui.tooling.preview.Preview
 import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.ext.*
-import com.isanechek.averdhub.ui.appFontFamily
 import com.isanechek.averdhub.ui.components.CircularImage
 import com.isanechek.averdhub.ui.components.SimpleVector
 import com.isanechek.averdhub.ui.themeTypography
@@ -27,7 +22,7 @@ import com.isanechek.averdhub.ui.themeTypography
 private const val TAG = "DashboardAppsCard"
 
 @Composable
-fun DashboardAppsCard(item: InstallApp, callback: (InstallApp) -> Unit) {
+fun DashboardAppsCard(item: InstallApp, callback: (InstallApp) -> Unit, isVertical: Boolean) {
     Padding(right = 2.dp, left = 2.dp) {
         Card(shape = RoundedCornerShape(8.dp)) {
             Ripple(bounded = true) {
@@ -35,7 +30,9 @@ fun DashboardAppsCard(item: InstallApp, callback: (InstallApp) -> Unit) {
                     Stack {
                         expanded {
                             Column {
-                                Container(height = 120.dp, width = 250.dp, expanded = false) {
+                                Dp.Infinity
+                                val widthSize = if (isVertical) null else 250.dp
+                                Container(height = 120.dp, width = widthSize, expanded = true) {
                                     Clip(
                                         shape = RoundedCornerShape(
                                             topLeft = 8.dp,
@@ -122,11 +119,4 @@ private fun drawStatus(@DrawableRes iconId: Int, statusText: String, color: Colo
             )
         }
     }
-}
-
-
-@Preview
-@Composable
-fun DACPreview() {
-    DashboardAppsCard(InstallApp.testItem()) {}
 }

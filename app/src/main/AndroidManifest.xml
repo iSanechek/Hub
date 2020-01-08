@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.isanechek.averdhub">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -20,14 +22,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.developer.debug.DebugActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
-<!--        <activity-->
-<!--            android:name="com.github.zsoltk.backtrack.">-->
-<!--            <intent-filter tools:node="removeAll">-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        </activity>
     </application>
 
 </manifest>
