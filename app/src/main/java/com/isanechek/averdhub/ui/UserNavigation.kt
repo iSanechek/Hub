@@ -26,18 +26,24 @@ interface UserNavigation {
                     is Routing.Dashboard -> DashboardScreen.Content(
                         vm = routing.appVm,
                         goToScreen = { screen ->
-                            Log.e(TAG, "Go to: $screen")
                             when (screen) {
                                 is GoToScreen.AllAppsScreen -> { backStack.push(Routing.AppsList(routing.appVm)) }
                                 is GoToScreen.AllSocialScreen -> {}
                                 is GoToScreen.DetailSocial -> {}
                                 is GoToScreen.DetailApp -> { backStack.push(Routing.AppsDetail(screen.data)) }
+                                else -> Log.e(TAG, "Dashboard go to hz! :(")
                             }
                         }
                     )
                     is Routing.AppsList -> AppsListScreen.Content(
                         appViewModel = routing.appVm,
-                        openDetail = { backStack.push(Routing.AppsDetail(it)) }
+                        goTo = { goTo ->
+                            when(goTo) {
+                                is GoToScreen.GoBack -> backStack.pop()
+                                is GoToScreen.DetailApp -> { backStack.push(Routing.AppsDetail(goTo.data)) }
+                                else -> Log.e(TAG, "Apps List go to hz! :(")
+                            }
+                        }
                     )
                     is Routing.AppsDetail -> AppsDetailScreen.Content(
                         item = routing.data,

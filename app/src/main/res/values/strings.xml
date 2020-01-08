@@ -12,6 +12,9 @@
     <string name="app_install_status_not">not installed</string>
     <string name="ds_all_title">All</string>
 
+    <!--Apps List Screen-->
+    <string name="als_toolbar_title">Apps list</string>
+
     <!--Splash screen-->
     <string name="splash_screen_welcome_text">Добро пожаловать в Hub</string>
 </resources>

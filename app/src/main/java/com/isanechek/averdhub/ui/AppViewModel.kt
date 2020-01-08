@@ -1,6 +1,5 @@
 package com.isanechek.averdhub.ui
 
-import android.util.Log
 import androidx.compose.state
 import androidx.compose.unaryPlus
 import androidx.lifecycle.LiveData
@@ -12,12 +11,8 @@ import com.isanechek.averdhub.data.models.OperationResult
 import com.isanechek.averdhub.data.models.SocialAction
 import com.isanechek.averdhub.data.repositories.AppsRepository
 import com.isanechek.averdhub.ext._text
-import com.isanechek.averdhub.ext.take
 import com.isanechek.averdhub.ui.base.BaseViewModel
-import com.isanechek.averdhub.ui.darkThemeColors
-import com.isanechek.averdhub.ui.lightThemeColors
 import kotlinx.coroutines.launch
-import kotlin.streams.toList
 
 
 private const val TAG = "DashboardViewModel"
@@ -32,7 +27,8 @@ class AppViewModel(private val repository: AppsRepository) : BaseViewModel() {
 
     private val _appsData = MutableLiveData<List<InstallApp>>()
     val appsData: LiveData<List<InstallApp>> = _appsData
-    val shortAppsData: LiveData<List<InstallApp>> = _appsData.take(1)
+    val shortAppsData: LiveData<List<InstallApp>> =
+        Transformations.switchMap(_appsData) { data -> MutableLiveData(data.take(3)) }
 
     private val _darkStatusBar = MutableLiveData<Boolean>(false)
     val darkStatusBar: LiveData<Boolean> = _darkStatusBar

@@ -7,7 +7,7 @@ import androidx.ui.engine.geometry.Shape
 import androidx.ui.foundation.shape.RectangleShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.*
-import androidx.ui.material.*
+import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Surface
 import androidx.ui.text.TextStyle
 

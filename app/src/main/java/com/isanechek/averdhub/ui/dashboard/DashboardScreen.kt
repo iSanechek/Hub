@@ -112,7 +112,7 @@ interface DashboardScreen {
                     aligned(alignment = Alignment.CenterRight) {
                         Ripple(bounded = false) {
                             Clickable(onClick = { click.invoke(if (isApps) GoToScreen.AllAppsScreen else GoToScreen.AllSocialScreen) }) {
-                                Text(text = +stringResource(_text.ds_apps_title))
+                                Text(text = +stringResource(_text.ds_all_title))
                             }
                         }
                     }
