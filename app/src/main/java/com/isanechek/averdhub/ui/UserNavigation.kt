@@ -37,7 +37,7 @@ interface UserNavigation {
                     )
                     is Routing.AppsList -> AppsListScreen.Content(
                         appViewModel = routing.appVm,
-                        goTo = { goTo ->
+                        goToScreen = { goTo ->
                             when(goTo) {
                                 is GoToScreen.GoBack -> backStack.pop()
                                 is GoToScreen.DetailApp -> { backStack.push(Routing.AppsDetail(goTo.data)) }

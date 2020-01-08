@@ -26,7 +26,7 @@ interface AppsListScreen {
         private const val TAG = "AppsListScreen"
 
         @Composable
-        fun Content(appViewModel: AppViewModel, goTo: (GoToScreen) -> Unit) {
+        fun Content(appViewModel: AppViewModel, goToScreen: (GoToScreen) -> Unit) {
             FlexColumn {
                 inflexible {
                     TopAppBar(
@@ -34,13 +34,13 @@ interface AppsListScreen {
                         navigationIcon = {
                             VectorImageButton(
                                 id = _drawable.ic_baseline_arrow_back_24,
-                                onClick = { goTo.invoke(GoToScreen.GoBack) },
+                                onClick = { goToScreen.invoke(GoToScreen.GoBack) },
                                 tint = (+MaterialTheme.colors()).onBackground
                             )
                         }
                     )
                 }
-                flexible(flex = 0f) { showContent(appViewModel, goTo) }
+                flexible(flex = 0f) { showContent(appViewModel, goToScreen) }
             }
         }
 
