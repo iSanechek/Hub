@@ -14,6 +14,7 @@ import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
 import androidx.ui.tooling.preview.Preview
 import com.isanechek.averdhub.data.models.SocialAction
+import com.isanechek.averdhub.ext.PostImage
 
 private const val TAG = "DashboardSocialCard"
 
@@ -30,7 +31,7 @@ fun DashboardSocialCard(item: SocialAction, callback: (SocialAction) -> Unit) {
 
                     Column {
                         Container(height = 100.dp, width = 140.dp, expanded = true) {
-
+                            PostImage(imageUrl = "")
                         }
                         Column(modifier = Spacing(16.dp)) {
                             Text(text = item.title)
