@@ -16,7 +16,7 @@ import com.isanechek.averdhub.data.models.GoToScreen
 import com.isanechek.averdhub.ext._drawable
 import com.isanechek.averdhub.ext._text
 import com.isanechek.averdhub.ext.observe
-import com.isanechek.averdhub.ui.AppViewModel
+import com.isanechek.averdhub.ui.viewmodel.AppViewModel
 import com.isanechek.averdhub.ui.components.VectorImageButton
 import com.isanechek.averdhub.ui.dashboard.DashboardAppsCard
 

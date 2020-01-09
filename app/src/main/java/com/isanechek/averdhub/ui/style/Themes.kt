@@ -1,4 +1,4 @@
-package com.isanechek.averdhub.ui
+package com.isanechek.averdhub.ui.style
 
 import androidx.ui.graphics.Color
 import androidx.ui.material.ColorPalette

@@ -14,7 +14,7 @@ import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
 import com.isanechek.averdhub.data.models.SocialAction
 import com.isanechek.averdhub.ext.PostImage
-import com.isanechek.averdhub.ui.themeTypography
+import com.isanechek.averdhub.ui.style.themeTypography
 
 @Composable
 fun SocialListItem(item: SocialAction, goTo: () -> Unit) {

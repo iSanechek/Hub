@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.isanechek.averdhub.ui
+package com.isanechek.averdhub.ui.style
 
 import androidx.ui.core.sp
 import androidx.ui.material.Typography
@@ -27,7 +27,11 @@ val regular = Font("montserrat_regular.ttf")
 val medium = Font("montserrat_medium.ttf", FontWeight.W500)
 val semibold = Font("montserrat_semibold.ttf", FontWeight.W600)
 
-val appFontFamily = FontFamily(fonts = listOf(regular, medium, semibold))
+val appFontFamily = FontFamily(fonts = listOf(
+    regular,
+    medium,
+    semibold
+))
 
 val bodyFontFamily = FontFamily(
     fonts = listOf(

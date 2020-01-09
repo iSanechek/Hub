@@ -1,8 +1,9 @@
-package com.isanechek.averdhub.ui
+package com.isanechek.averdhub.ui.navigation
 
 import android.util.Log
 import androidx.compose.Composable
 import com.github.zsoltk.compose.router.Router
+import com.isanechek.averdhub.ui.viewmodel.AppViewModel
 import com.isanechek.averdhub.ui.developer.Developer
 
 interface Root {

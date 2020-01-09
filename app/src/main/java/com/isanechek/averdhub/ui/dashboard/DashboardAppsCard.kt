@@ -17,7 +17,7 @@ import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.ext.*
 import com.isanechek.averdhub.ui.components.CircularImage
 import com.isanechek.averdhub.ui.components.SimpleVector
-import com.isanechek.averdhub.ui.themeTypography
+import com.isanechek.averdhub.ui.style.themeTypography
 
 private const val TAG = "DashboardAppsCard"
 

@@ -4,7 +4,6 @@ import androidx.compose.Composable
 import androidx.compose.unaryPlus
 import androidx.ui.core.dp
 import androidx.ui.core.sp
-import androidx.ui.foundation.shape.border.Border
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.material.Button
@@ -13,9 +12,6 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontStyle
 import androidx.ui.tooling.preview.Preview
-import com.isanechek.averdhub.ui.appFontFamily
-import com.isanechek.averdhub.ui.medium
-import com.isanechek.averdhub.ui.themeTypography
 
 
 @Composable

@@ -11,8 +11,8 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Surface
 import com.github.zsoltk.compose.backpress.BackPressHandler
 import com.github.zsoltk.compose.savedinstancestate.TimeCapsule
-import com.isanechek.averdhub.ui.Root
-import com.isanechek.averdhub.ui.AppViewModel
+import com.isanechek.averdhub.ui.navigation.Root
+import com.isanechek.averdhub.ui.viewmodel.AppViewModel
 //import com.isanechek.averdhub.ui.dashboard.DashboardViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

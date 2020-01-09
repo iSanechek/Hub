@@ -1,4 +1,4 @@
-package com.isanechek.averdhub.ui
+package com.isanechek.averdhub.ui.viewmodel
 
 import androidx.compose.state
 import androidx.compose.unaryPlus
@@ -12,6 +12,8 @@ import com.isanechek.averdhub.data.models.SocialAction
 import com.isanechek.averdhub.data.repositories.AppsRepository
 import com.isanechek.averdhub.ext._text
 import com.isanechek.averdhub.ui.base.BaseViewModel
+import com.isanechek.averdhub.ui.style.darkThemeColors
+import com.isanechek.averdhub.ui.style.lightThemeColors
 import kotlinx.coroutines.launch
 
 

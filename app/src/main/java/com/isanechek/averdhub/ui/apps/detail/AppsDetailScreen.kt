@@ -16,7 +16,7 @@ import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.ext.*
 import com.isanechek.averdhub.ui.components.SmallInstallButton
 import com.isanechek.averdhub.ui.components.VectorImageButton
-import com.isanechek.averdhub.ui.themeTypography
+import com.isanechek.averdhub.ui.style.themeTypography
 
 interface AppsDetailScreen {
 
