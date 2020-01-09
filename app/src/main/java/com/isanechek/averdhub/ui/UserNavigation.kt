@@ -5,15 +5,19 @@ import androidx.compose.Composable
 import com.github.zsoltk.compose.router.Router
 import com.isanechek.averdhub.data.models.GoToScreen
 import com.isanechek.averdhub.data.models.InstallApp
+import com.isanechek.averdhub.data.models.SocialAction
 import com.isanechek.averdhub.ui.appsdetail.AppsDetailScreen
 import com.isanechek.averdhub.ui.appslist.AppsListScreen
 import com.isanechek.averdhub.ui.dashboard.DashboardScreen
+import com.isanechek.averdhub.ui.sociallist.AllSocialList
 
 interface UserNavigation {
 
     sealed class Routing {
-        data class Dashboard(val appVm: AppViewModel) : Routing()
-        data class AppsList(val appVm: AppViewModel): Routing()
+        data class Dashboard(val appViewModel: AppViewModel) : Routing()
+        data class AllSocial(val appViewModel: AppViewModel) : Routing()
+        data class SocialDetail(val data: SocialAction) : Routing()
+        data class AppsList(val appViewModel: AppViewModel) : Routing()
         data class AppsDetail(val data: InstallApp) : Routing()
     }
 
@@ -24,19 +28,19 @@ interface UserNavigation {
             Router(contextId = "Hub", defaultRouting = defaultRouting) { backStack ->
                 when(val routing = backStack.last()) {
                     is Routing.Dashboard -> DashboardScreen.Content(
-                        vm = routing.appVm,
-                        goToScreen = { screen ->
-                            when (screen) {
-                                is GoToScreen.AllAppsScreen -> { backStack.push(Routing.AppsList(routing.appVm)) }
-                                is GoToScreen.AllSocialScreen -> {}
+                        vm = routing.appViewModel,
+                        goToScreen = { goTo ->
+                            when (goTo) {
+                                is GoToScreen.AllAppsScreen -> { backStack.push(Routing.AppsList(routing.appViewModel)) }
+                                is GoToScreen.AllSocialScreen -> { backStack.push(Routing.AllSocial(routing.appViewModel)) }
                                 is GoToScreen.DetailSocial -> {}
-                                is GoToScreen.DetailApp -> { backStack.push(Routing.AppsDetail(screen.data)) }
+                                is GoToScreen.DetailApp -> { backStack.push(Routing.AppsDetail(goTo.data)) }
                                 else -> Log.e(TAG, "Dashboard go to hz! :(")
                             }
                         }
                     )
                     is Routing.AppsList -> AppsListScreen.Content(
-                        appViewModel = routing.appVm,
+                        appViewModel = routing.appViewModel,
                         goToScreen = { goTo ->
                             when(goTo) {
                                 is GoToScreen.GoBack -> backStack.pop()
@@ -48,6 +52,16 @@ interface UserNavigation {
                     is Routing.AppsDetail -> AppsDetailScreen.Content(
                         item = routing.data,
                         goBack = { backStack.pop() }
+                    )
+                    is Routing.AllSocial -> AllSocialList.Content(
+                        appViewModel = routing.appViewModel,
+                        goToScreen = { goTo ->
+                            when(goTo) {
+                                is GoToScreen.DetailSocial -> { Routing.SocialDetail(goTo.data) }
+                                is GoToScreen.GoBack -> { backStack.pop() }
+                                else -> Log.e(TAG, "Social list go to hz! :(")
+                            }
+                        }
                     )
                 }
             }

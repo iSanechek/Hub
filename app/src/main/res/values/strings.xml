@@ -15,6 +15,9 @@
     <!--Apps List Screen-->
     <string name="als_toolbar_title">Apps list</string>
 
+    <!--All Social Action-->
+    <string name="asa_toolbar_title">All social actions</string>
+
     <!--Splash screen-->
     <string name="splash_screen_welcome_text">Добро пожаловать в Hub</string>
 </resources>

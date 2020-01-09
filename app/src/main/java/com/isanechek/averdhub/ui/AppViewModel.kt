@@ -21,6 +21,8 @@ class AppViewModel(private val repository: AppsRepository) : BaseViewModel() {
 
     private val _socialData = MutableLiveData<List<SocialAction>>()
     val socialData: LiveData<List<SocialAction>> = _socialData
+    val shortSocialData: LiveData<List<SocialAction>> =
+        Transformations.switchMap(_socialData) { data -> MutableLiveData(data.take(5)) }
 
     private val _appProgressState = MutableLiveData<Boolean>()
     val appsProgressState: LiveData<Boolean> = _appProgressState

@@ -30,7 +30,6 @@ fun DashboardAppsCard(item: InstallApp, callback: (InstallApp) -> Unit, isVertic
                     Stack {
                         expanded {
                             Column {
-                                Dp.Infinity
                                 val widthSize = if (isVertical) null else 250.dp
                                 Container(height = 120.dp, width = widthSize, expanded = true) {
                                     Clip(

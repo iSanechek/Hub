@@ -65,7 +65,7 @@ interface DashboardScreen {
 
             HorizontalScroller {
                 Row(modifier = Spacing(all = 8.dp)) {
-                    val data = +observe(vm.socialData)
+                    val data = +observe(vm.shortSocialData)
                     data?.forEach { item ->
                         DashboardSocialCard(
                             item = item,
