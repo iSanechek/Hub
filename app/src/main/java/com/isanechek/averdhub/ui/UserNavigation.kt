@@ -6,10 +6,10 @@ import com.github.zsoltk.compose.router.Router
 import com.isanechek.averdhub.data.models.GoToScreen
 import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.data.models.SocialAction
-import com.isanechek.averdhub.ui.appsdetail.AppsDetailScreen
-import com.isanechek.averdhub.ui.appslist.AppsListScreen
+import com.isanechek.averdhub.ui.apps.detail.AppsDetailScreen
+import com.isanechek.averdhub.ui.apps.list.AppsListScreen
 import com.isanechek.averdhub.ui.dashboard.DashboardScreen
-import com.isanechek.averdhub.ui.sociallist.AllSocialList
+import com.isanechek.averdhub.ui.social.list.SocialListScreen
 
 interface UserNavigation {
 
@@ -53,7 +53,7 @@ interface UserNavigation {
                         item = routing.data,
                         goBack = { backStack.pop() }
                     )
-                    is Routing.AllSocial -> AllSocialList.Content(
+                    is Routing.AllSocial -> SocialListScreen.Content(
                         appViewModel = routing.appViewModel,
                         goToScreen = { goTo ->
                             when(goTo) {

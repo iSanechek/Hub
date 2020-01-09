@@ -1,4 +1,4 @@
-package com.isanechek.averdhub.ui.appsdetail
+package com.isanechek.averdhub.ui.apps.detail
 
 import androidx.compose.Composable
 import androidx.compose.unaryPlus
@@ -6,21 +6,14 @@ import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.shape.border.Border
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
 import androidx.ui.layout.*
-import androidx.ui.material.Button
-import androidx.ui.material.ButtonStyle
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
-import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
-import androidx.ui.res.vectorResource
 import androidx.ui.tooling.preview.Preview
 import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.ext.*
-import com.isanechek.averdhub.ui.components.SimpleVector
 import com.isanechek.averdhub.ui.components.SmallInstallButton
 import com.isanechek.averdhub.ui.components.VectorImageButton
 import com.isanechek.averdhub.ui.themeTypography
@@ -31,14 +24,25 @@ interface AppsDetailScreen {
         @Composable
         fun Content(item: InstallApp, goBack: () -> Unit) {
             FlexColumn {
-                inflexible { DetailAppsAppBar(title = item.name, goBack = goBack) }
+                inflexible {
+                    DetailAppsAppBar(
+                        title = item.name,
+                        goBack = goBack
+                    )
+                }
                 flexible(1f) {
                     VerticalScroller {
                         Column {
-                            CoverSection(item = item)
-                            AppInfoSection(item = item)
+                            CoverSection(
+                                item = item
+                            )
+                            AppInfoSection(
+                                item = item
+                            )
                             HeightSpacer(height = 16.dp)
-                            ContentTextSection(item = item)
+                            ContentTextSection(
+                                item = item
+                            )
                         }
                     }
                 }
@@ -97,7 +101,9 @@ interface AppsDetailScreen {
 
                     aligned(alignment = Alignment.CenterRight) {
                         Padding(right = 16.dp) {
-                            setupStatusAction(status = item.status)
+                            setupStatusAction(
+                                status = item.status
+                            )
                         }
                     }
 
@@ -131,5 +137,7 @@ interface AppsDetailScreen {
 @Preview
 @Composable
 fun ADSPreview() {
-    AppsDetailScreen.Content(item = InstallApp.testItem()) {}
+    AppsDetailScreen.Content(
+        item = InstallApp.testItem()
+    ) {}
 }

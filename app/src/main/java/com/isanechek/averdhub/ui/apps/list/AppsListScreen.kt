@@ -1,5 +1,6 @@
-package com.isanechek.averdhub.ui.sociallist
+package com.isanechek.averdhub.ui.apps.list
 
+import android.util.Log
 import androidx.compose.Composable
 import androidx.compose.unaryPlus
 import androidx.ui.core.Text
@@ -17,38 +18,52 @@ import com.isanechek.averdhub.ext._text
 import com.isanechek.averdhub.ext.observe
 import com.isanechek.averdhub.ui.AppViewModel
 import com.isanechek.averdhub.ui.components.VectorImageButton
+import com.isanechek.averdhub.ui.dashboard.DashboardAppsCard
 
-interface AllSocialList {
+interface AppsListScreen {
 
     companion object {
+        private const val TAG = "AppsListScreen"
 
         @Composable
         fun Content(appViewModel: AppViewModel, goToScreen: (GoToScreen) -> Unit) {
             FlexColumn {
                 inflexible {
                     TopAppBar(
-                        title = { Text(text = +stringResource(_text.asa_toolbar_title)) },
+                        title = { Text(text = +stringResource(_text.als_toolbar_title)) },
                         navigationIcon = {
                             VectorImageButton(
                                 id = _drawable.ic_baseline_arrow_back_24,
                                 onClick = { goToScreen.invoke(GoToScreen.GoBack) },
-                                tint = (+MaterialTheme.colors()).onBackground)
+                                tint = (+MaterialTheme.colors()).onBackground
+                            )
                         }
                     )
                 }
-                flexible(flex = 0f) { ShowContent(appViewModel, goToScreen) }
+                flexible(flex = 0f) {
+                    ShowContent(
+                        appViewModel,
+                        goToScreen
+                    )
+                }
             }
         }
 
+
         @Composable
-        private fun ShowContent(appViewModel: AppViewModel, goToScreen: (GoToScreen) -> Unit) {
-            val data = +observe(appViewModel.socialData)
-            if (!data.isNullOrEmpty()) {
-                VerticalScroller {
-                    Column {
+        private fun ShowContent(appViewModel: AppViewModel, openDetail: (GoToScreen) -> Unit) {
+            val data = +observe(appViewModel.appsData)
+            Log.e(TAG, "Content: SIZE ${data?.size}")
+            VerticalScroller {
+                Column {
+                    if (!data.isNullOrEmpty()) {
                         data.forEach { item ->
                             Padding(left = 8.dp, right = 8.dp, top = 5.dp, bottom = 3.dp) {
-                                SocialListItem(item = item, goTo = { })
+                                DashboardAppsCard(
+                                    item = item,
+                                    callback = { openDetail.invoke(GoToScreen.DetailApp(it)) },
+                                    isVertical = true
+                                )
                             }
                         }
                     }

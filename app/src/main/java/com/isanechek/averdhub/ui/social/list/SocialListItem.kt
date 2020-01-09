@@ -1,4 +1,4 @@
-package com.isanechek.averdhub.ui.sociallist
+package com.isanechek.averdhub.ui.social.list
 
 import androidx.compose.Composable
 import androidx.ui.core.Alignment
