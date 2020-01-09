@@ -10,6 +10,7 @@ import com.isanechek.averdhub.ui.viewmodel.AppViewModel
 import com.isanechek.averdhub.ui.apps.detail.AppsDetailScreen
 import com.isanechek.averdhub.ui.apps.list.AppsListScreen
 import com.isanechek.averdhub.ui.dashboard.DashboardScreen
+import com.isanechek.averdhub.ui.social.detail.SocialDetailScreen
 import com.isanechek.averdhub.ui.social.list.SocialListScreen
 
 interface UserNavigation {
@@ -27,27 +28,34 @@ interface UserNavigation {
         @Composable
         fun Content(defaultRouting: Routing) {
             Router(contextId = "Hub", defaultRouting = defaultRouting) { backStack ->
-                when(val routing = backStack.last()) {
+                when (val routing = backStack.last()) {
                     is Routing.Dashboard -> DashboardScreen.Content(
                         vm = routing.appViewModel,
                         goToScreen = { goTo ->
                             when (goTo) {
-                                is GoToScreen.AllAppsScreen -> { backStack.push(
-                                    Routing.AppsList(
-                                        routing.appViewModel
+                                is GoToScreen.AllAppsScreen -> {
+                                    backStack.push(
+                                        Routing.AppsList(
+                                            routing.appViewModel
+                                        )
                                     )
-                                ) }
-                                is GoToScreen.AllSocialScreen -> { backStack.push(
-                                    Routing.AllSocial(
-                                        routing.appViewModel
+                                }
+                                is GoToScreen.AllSocialScreen -> {
+                                    backStack.push(
+                                        Routing.AllSocial(
+                                            routing.appViewModel
+                                        )
                                     )
-                                ) }
-                                is GoToScreen.DetailSocial -> {}
-                                is GoToScreen.DetailApp -> { backStack.push(
-                                    Routing.AppsDetail(
-                                        goTo.data
+                                }
+                                is GoToScreen.DetailSocial -> {
+                                }
+                                is GoToScreen.DetailApp -> {
+                                    backStack.push(
+                                        Routing.AppsDetail(
+                                            goTo.data
+                                        )
                                     )
-                                ) }
+                                }
                                 else -> Log.e(TAG, "Dashboard go to hz! :(")
                             }
                         }
@@ -55,13 +63,15 @@ interface UserNavigation {
                     is Routing.AppsList -> AppsListScreen.Content(
                         appViewModel = routing.appViewModel,
                         goToScreen = { goTo ->
-                            when(goTo) {
+                            when (goTo) {
                                 is GoToScreen.GoBack -> backStack.pop()
-                                is GoToScreen.DetailApp -> { backStack.push(
-                                    Routing.AppsDetail(
-                                        goTo.data
+                                is GoToScreen.DetailApp -> {
+                                    backStack.push(
+                                        Routing.AppsDetail(
+                                            goTo.data
+                                        )
                                     )
-                                ) }
+                                }
                                 else -> Log.e(TAG, "Apps List go to hz! :(")
                             }
                         }
@@ -73,16 +83,25 @@ interface UserNavigation {
                     is Routing.AllSocial -> SocialListScreen.Content(
                         appViewModel = routing.appViewModel,
                         goToScreen = { goTo ->
-                            when(goTo) {
+                            when (goTo) {
                                 is GoToScreen.DetailSocial -> {
-                                    Routing.SocialDetail(
-                                        goTo.data
+                                    Log.e(TAG, "BOOM")
+                                    backStack.push(
+                                        Routing.SocialDetail(
+                                            goTo.data
+                                        )
                                     )
                                 }
-                                is GoToScreen.GoBack -> { backStack.pop() }
+                                is GoToScreen.GoBack -> {
+                                    backStack.pop()
+                                }
                                 else -> Log.e(TAG, "Social list go to hz! :(")
                             }
                         }
+                    )
+                    is Routing.SocialDetail -> SocialDetailScreen.Content(
+                        data = routing.data,
+                        goBack = { backStack.pop() }
                     )
                 }
             }

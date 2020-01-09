@@ -55,7 +55,7 @@ interface SocialListScreen {
                             Padding(left = 8.dp, right = 8.dp, top = 5.dp, bottom = 3.dp) {
                                 SocialListItem(
                                     item = item,
-                                    goTo = { })
+                                    goTo = { goToScreen.invoke(GoToScreen.DetailSocial(item)) })
                             }
                         }
                     }
