@@ -5,12 +5,14 @@ import androidx.compose.unaryPlus
 import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
+import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.*
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.surface.Card
+import com.isanechek.averdhub.data.models.GoToScreen
 import com.isanechek.averdhub.data.models.SocialAction
 import com.isanechek.averdhub.ext.PostImage
 import com.isanechek.averdhub.ext._drawable
@@ -21,7 +23,7 @@ interface SocialDetailScreen {
 
     companion object {
         @Composable
-        fun Content(data: SocialAction, goBack: () -> Unit) {
+        fun Content(data: SocialAction, goToScreen: (GoToScreen) -> Unit) {
             FlexColumn {
                 inflexible {
                     TopAppBar(
@@ -29,21 +31,23 @@ interface SocialDetailScreen {
                         navigationIcon = {
                             VectorImageButton(
                                 id = _drawable.ic_baseline_arrow_back_24,
-                                onClick = { goBack.invoke() },
+                                onClick = { goToScreen.invoke(GoToScreen.GoBack) },
                                 tint = (+MaterialTheme.colors()).onBackground
                             )
                         })
                 }
-                flexible(flex = 0f) { ShowContent(data = data) }
+                flexible(flex = 0f) { ShowContent(data = data, goTo = goToScreen) }
             }
         }
 
         @Composable
-        private fun ShowContent(data: SocialAction) {
+        private fun ShowContent(data: SocialAction, goTo: (GoToScreen) -> Unit) {
             VerticalScroller {
                 Column {
-                    Container(height = 150.dp, expanded = true) {
-                        PostImage(imageUrl = "")
+                    Clickable(onClick = { goTo.invoke(GoToScreen.ImageViewer("")) }) {
+                        Container(height = 150.dp, expanded = true) {
+                            PostImage(imageUrl = "")
+                        }
                     }
 
                     Card(elevation = 2.dp, shape = RoundedCornerShape(0.dp)) {

@@ -7,10 +7,10 @@ import androidx.annotation.CheckResult
 import androidx.annotation.RequiresApi
 import androidx.compose.*
 import androidx.core.graphics.drawable.toBitmap
+import androidx.ui.core.Draw
+import androidx.ui.engine.geometry.Rect
 import androidx.ui.foundation.DrawImage
-import androidx.ui.graphics.Image
-import androidx.ui.graphics.ImageConfig
-import androidx.ui.graphics.NativeImage
+import androidx.ui.graphics.*
 import androidx.ui.graphics.colorspace.ColorSpace
 import androidx.ui.graphics.colorspace.ColorSpaces
 import androidx.ui.res.imageResource
@@ -32,15 +32,6 @@ fun PostImage(imageUrl: String) {
         Log.e(TAG, "PostImage: ${source.width}")
         DrawImage(image = source)
     } else Log.e(TAG, "PostImage: source null")
-}
-
-@Composable
-fun PostImage(id: Int) {
-    val source = +image(_drawable.test_img)
-    if (source != null) {
-        Log.e(TAG, "PostImage: ${source.width}")
-        DrawImage(image = source)
-    } else Log.e(TAG, "PostImage: source null!")
 }
 
 /**
@@ -166,5 +157,48 @@ internal fun android.graphics.ColorSpace.toComposeColorSpace(): ColorSpace {
         android.graphics.ColorSpace.get(android.graphics.ColorSpace.Named.SMPTE_C)
         -> ColorSpaces.SmpteC
         else -> ColorSpaces.Srgb
+    }
+}
+
+@Composable
+fun CustomDrawImage(image: Image, tint: Color? = null) {
+    val paint = +memo { Paint().apply {
+        filterQuality = FilterQuality.low // we only support low currently
+    } }
+    paint.colorFilter = tint?.let { ColorFilter(it, BlendMode.srcIn) }
+    Draw { canvas, parentSize ->
+        val inputWidth = image.width.toFloat()
+        val inputHeight = image.height.toFloat()
+        val inputAspectRatio = inputWidth / inputHeight
+
+        val outputWidth = parentSize.width.value
+        val outputHeight = parentSize.height.value
+        val outputAspectRatio = outputWidth / outputHeight
+
+        val fittedWidth = if (outputAspectRatio > inputAspectRatio) {
+            inputWidth
+        } else {
+            inputHeight * outputAspectRatio
+        }
+        val fittedHeight = if (outputAspectRatio > inputAspectRatio) {
+            inputWidth / outputAspectRatio
+        } else {
+            inputHeight
+        }
+
+        val srcRect = Rect(
+            left = (inputWidth - fittedWidth) / 2,
+            top = (inputHeight - fittedHeight) / 2,
+            right = (inputWidth + fittedWidth) / 2,
+            bottom = (inputHeight + fittedHeight) / 2
+        )
+
+        val dstRect = Rect(
+            left = 0f,
+            top = 0f,
+            right = outputWidth,
+            bottom = outputHeight
+        )
+        canvas.drawImageRect(image, srcRect, dstRect, paint)
     }
 }

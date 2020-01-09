@@ -10,6 +10,7 @@ import com.isanechek.averdhub.ui.viewmodel.AppViewModel
 import com.isanechek.averdhub.ui.apps.detail.AppsDetailScreen
 import com.isanechek.averdhub.ui.apps.list.AppsListScreen
 import com.isanechek.averdhub.ui.dashboard.DashboardScreen
+import com.isanechek.averdhub.ui.imageviewer.ImageViewerScreen
 import com.isanechek.averdhub.ui.social.detail.SocialDetailScreen
 import com.isanechek.averdhub.ui.social.list.SocialListScreen
 
@@ -21,6 +22,7 @@ interface UserNavigation {
         data class SocialDetail(val data: SocialAction) : Routing()
         data class AppsList(val appViewModel: AppViewModel) : Routing()
         data class AppsDetail(val data: InstallApp) : Routing()
+        data class ImageViewer(val url: String) : Routing()
     }
 
     companion object {
@@ -78,14 +80,23 @@ interface UserNavigation {
                     )
                     is Routing.AppsDetail -> AppsDetailScreen.Content(
                         item = routing.data,
-                        goBack = { backStack.pop() }
+                        goToScreen = { goTo ->
+                            when (goTo) {
+                                is GoToScreen.GoBack -> {
+                                    backStack.pop()
+                                }
+                                is GoToScreen.ImageViewer -> {
+                                    backStack.push(Routing.ImageViewer(goTo.url))
+                                }
+                                else -> Log.e(TAG, "Apps Detail go to hz! :(")
+                            }
+                        }
                     )
                     is Routing.AllSocial -> SocialListScreen.Content(
                         appViewModel = routing.appViewModel,
                         goToScreen = { goTo ->
                             when (goTo) {
                                 is GoToScreen.DetailSocial -> {
-                                    Log.e(TAG, "BOOM")
                                     backStack.push(
                                         Routing.SocialDetail(
                                             goTo.data
@@ -101,6 +112,19 @@ interface UserNavigation {
                     )
                     is Routing.SocialDetail -> SocialDetailScreen.Content(
                         data = routing.data,
+                        goToScreen = { goTo ->
+                            when (goTo) {
+                                is GoToScreen.ImageViewer -> {
+                                    backStack.push(Routing.ImageViewer(goTo.url))
+                                }
+                                is GoToScreen.GoBack -> {
+                                    backStack.pop()
+                                }
+                                else -> Log.e(TAG, "Social detail go to hz! :(")
+                            }
+                        }
+                    )
+                    is Routing.ImageViewer -> ImageViewerScreen.Content(
                         goBack = { backStack.pop() }
                     )
                 }

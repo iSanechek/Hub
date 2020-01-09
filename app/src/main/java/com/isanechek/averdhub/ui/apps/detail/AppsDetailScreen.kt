@@ -5,6 +5,7 @@ import androidx.compose.unaryPlus
 import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
+import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.*
@@ -12,6 +13,7 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.surface.Card
 import androidx.ui.tooling.preview.Preview
+import com.isanechek.averdhub.data.models.GoToScreen
 import com.isanechek.averdhub.data.models.InstallApp
 import com.isanechek.averdhub.ext.*
 import com.isanechek.averdhub.ui.components.SmallInstallButton
@@ -22,19 +24,20 @@ interface AppsDetailScreen {
 
     companion object {
         @Composable
-        fun Content(item: InstallApp, goBack: () -> Unit) {
+        fun Content(item: InstallApp, goToScreen: (GoToScreen) -> Unit) {
             FlexColumn {
                 inflexible {
                     DetailAppsAppBar(
                         title = item.name,
-                        goBack = goBack
+                        goTo = goToScreen
                     )
                 }
                 flexible(1f) {
                     VerticalScroller {
                         Column {
                             CoverSection(
-                                item = item
+                                item = item,
+                                goTo = goToScreen
                             )
                             AppInfoSection(
                                 item = item
@@ -52,14 +55,14 @@ interface AppsDetailScreen {
         @Composable
         private fun DetailAppsAppBar(
             title: String,
-            goBack: () -> Unit
+            goTo: (GoToScreen) -> Unit
         ) {
             TopAppBar(
                 title = { Text(text = title) },
                 navigationIcon = {
                     VectorImageButton(
                         id = _drawable.ic_baseline_arrow_back_24,
-                        onClick = goBack,
+                        onClick = { goTo.invoke(GoToScreen.GoBack) },
                         tint = (+MaterialTheme.colors()).onBackground
                     )
                 }
@@ -67,10 +70,11 @@ interface AppsDetailScreen {
         }
 
         @Composable
-        private fun CoverSection(item: InstallApp) {
-
-            Container(height = 180.dp, expanded = true) {
-                PostImage(imageUrl = item.caverUrl)
+        private fun CoverSection(item: InstallApp, goTo: (GoToScreen) -> Unit) {
+            Clickable(onClick = { goTo.invoke(GoToScreen.ImageViewer(item.caverUrl)) }) {
+                Container(height = 180.dp, expanded = true) {
+                    PostImage(imageUrl = item.caverUrl)
+                }
             }
         }
 
