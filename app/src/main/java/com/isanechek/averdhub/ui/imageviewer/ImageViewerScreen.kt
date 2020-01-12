@@ -9,10 +9,7 @@ import androidx.ui.core.dp
 import androidx.ui.foundation.shape.DrawShape
 import androidx.ui.foundation.shape.corner.CircleShape
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.Container
-import androidx.ui.layout.HeightSpacer
-import androidx.ui.layout.Padding
-import androidx.ui.layout.Stack
+import androidx.ui.layout.*
 import androidx.ui.material.MaterialTheme
 import androidx.ui.tooling.preview.Preview
 import com.isanechek.averdhub.ext.PostImage

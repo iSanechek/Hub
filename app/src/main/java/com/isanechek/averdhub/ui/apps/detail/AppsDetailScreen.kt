@@ -6,11 +6,13 @@ import androidx.ui.core.Alignment
 import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.HorizontalScroller
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.*
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
+import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
 import androidx.ui.tooling.preview.Preview
 import com.isanechek.averdhub.data.models.GoToScreen
@@ -43,9 +45,30 @@ interface AppsDetailScreen {
                                 item = item
                             )
                             HeightSpacer(height = 16.dp)
+                            ScreenshotSection(goTo = goToScreen)
+                            HeightSpacer(height = 16.dp)
                             ContentTextSection(
                                 item = item
                             )
+                        }
+                    }
+                }
+            }
+        }
+
+        @Composable
+        private fun ScreenshotSection(goTo: (GoToScreen) -> Unit) {
+            val data = listOf("","","","","")
+            Column {
+
+                Padding(left = 12.dp) {
+                    Text(text = "Screenshots", style = themeTypography.h6)
+                }
+
+                HorizontalScroller {
+                    Row(modifier = Spacing(all = 8.dp)) {
+                        data.forEach { item ->
+                            ScreenshotCard(url = item, goToScreen = goTo)
                         }
                     }
                 }
@@ -118,10 +141,17 @@ interface AppsDetailScreen {
 
         @Composable
         private fun ContentTextSection(item: InstallApp) {
-            Padding(left = 8.dp, right = 8.dp, bottom = 8.dp) {
-                Card(shape = RoundedCornerShape(8.dp), elevation = 2.dp) {
-                    Padding(padding = 16.dp) {
-                        Text(text = item.description, style = themeTypography.body1)
+            Column {
+
+                Padding(left = 12.dp, bottom = 8.dp) {
+                    Text(text = "Information", style = themeTypography.h6)
+                }
+
+                Padding(left = 8.dp, right = 8.dp, bottom = 8.dp) {
+                    Card(shape = RoundedCornerShape(8.dp), elevation = 2.dp) {
+                        Padding(padding = 16.dp) {
+                            Text(text = item.description, style = themeTypography.body1)
+                        }
                     }
                 }
             }

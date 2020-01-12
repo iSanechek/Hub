@@ -2,6 +2,7 @@ package com.isanechek.averdhub.ui.navigation
 
 import android.util.Log
 import androidx.compose.Composable
+import androidx.ui.animation.Crossfade
 import com.github.zsoltk.compose.router.Router
 import com.isanechek.averdhub.data.models.GoToScreen
 import com.isanechek.averdhub.data.models.InstallApp
@@ -10,6 +11,7 @@ import com.isanechek.averdhub.ui.viewmodel.AppViewModel
 import com.isanechek.averdhub.ui.apps.detail.AppsDetailScreen
 import com.isanechek.averdhub.ui.apps.list.AppsListScreen
 import com.isanechek.averdhub.ui.dashboard.DashboardScreen
+import com.isanechek.averdhub.ui.home.HomeScreen
 import com.isanechek.averdhub.ui.imageviewer.ImageViewerScreen
 import com.isanechek.averdhub.ui.social.detail.SocialDetailScreen
 import com.isanechek.averdhub.ui.social.list.SocialListScreen
@@ -31,8 +33,8 @@ interface UserNavigation {
         fun Content(defaultRouting: Routing) {
             Router(contextId = "Hub", defaultRouting = defaultRouting) { backStack ->
                 when (val routing = backStack.last()) {
-                    is Routing.Dashboard -> DashboardScreen.Content(
-                        vm = routing.appViewModel,
+                    is Routing.Dashboard -> HomeScreen.Content(
+                        appViewModel = routing.appViewModel,
                         goToScreen = { goTo ->
                             when (goTo) {
                                 is GoToScreen.AllAppsScreen -> {
